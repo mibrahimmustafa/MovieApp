@@ -34,7 +34,7 @@ final bool ?isShowDetails;
             ),
 
             Container(
-              height:isShowDetails==true? height * 0.25: height * 0.20,
+              height:isShowDetails==true? height * 0.27: height * 0.20,
               child:      newRealeasesList!.isEmpty?Center(child: const Text("Not Found")):ListView.separated(
                 separatorBuilder: (context, index) => const SizedBox(
                   width: 10,
@@ -42,10 +42,9 @@ final bool ?isShowDetails;
 
                 itemBuilder: (context, index) => InkWell(
                   onTap: (){
-                    if(isShowDetails==true){}else{
                       Navigator.push(context,
                           MaterialPageRoute(builder: (ctx) =>  MovieDetailsPage(id:newRealeasesList![index].id??0 ,)));
-                    }
+
 
                   },
                   child: SizedBox(
