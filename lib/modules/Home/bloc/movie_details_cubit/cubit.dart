@@ -70,7 +70,6 @@ id:id ,
         emit(SimilarMoviesErrorStates());
       },
           (data) {
-            print("data====>" + data[0].title.toString());
   // emit(SimilarMoviesSuccessStates());
         _newSimilarMoviesList = data;
 
