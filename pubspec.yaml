@@ -42,6 +42,7 @@ dependencies:
   cached_network_image: ^3.2.3
   fluttertoast: ^8.2.5
   http: ^1.2.0
+  firebase_core: ^2.27.0
 
 
 
