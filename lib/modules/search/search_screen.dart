@@ -183,7 +183,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         )
                       ],
                     )
-                        : Column(
+                        :Column(
                       children: [
                         InkWell(
                           onTap: () {
