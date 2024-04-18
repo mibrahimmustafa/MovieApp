@@ -43,6 +43,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var mediaquery=MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SafeArea(
@@ -76,95 +77,32 @@ class _SearchScreenState extends State<SearchScreen> {
                     }
                   },
                 ),
-                searchController.text.isEmpty
-                    ? FutureBuilder<MovieRecommendationsModel>(
-                  future: popularMovies,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      var data = snapshot.data?.results;
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              const Text(
-                                "Top Searches",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                 padding: const EdgeInsets.all(3),
-                                scrollDirection: Axis.vertical,
-                                itemCount: data!.length,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              MovieDetailScreen(
-                                                movieId: data[index].id,
-                                              ),
-                                        ),
-                                      );
-                                    },
-                                    child: SizedBox(
-                                     height: 120,
-                                      width:50,
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Image.network(
-                                            '$imageUrl${data[index].posterPath}',
-                                            fit: BoxFit.fitHeight,
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(data[index].title),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(data[index].voteAverage.toString())
-                                        ],
-                                      ),
+                const SizedBox(height: 20,),
 
-                                    ),
-                                  );
-                                },
-                              )
-                            ]),
-                      );
-                    } else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  },
-                )
+                searchController.text.isEmpty
+                    ?  Padding(
+                      padding:  EdgeInsets.symmetric(vertical: mediaquery.height*.27),
+                      child: SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: Image.asset("assets/images/search_image.png"),
+                          //   borderRadius: BorderRadius.circular(32),
+                        ),
+                    )
                     : searchedMovie == null
                     ? const SizedBox.shrink()
-                    : GridView.builder(
+                    : ListView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: searchedMovie?.results.length,
-                  gridDelegate:
-                  const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    mainAxisSpacing: 15,
-                    crossAxisSpacing: 5,
-                    childAspectRatio: 1.2 / 2,
-                  ),
+                //  gridDelegate:
+                 // const SliverGridDelegateWithFixedCrossAxisCount(
+                  //  crossAxisCount: 1,
+                    //mainAxisSpacing: 15,
+                    //crossAxisSpacing: 5,
+                    //childAspectRatio: 1.2 / 2,
+                  //),
                   itemBuilder: (context, index) {
                     return searchedMovie!.results[index].backdropPath ==
                         null
@@ -197,22 +135,24 @@ class _SearchScreenState extends State<SearchScreen> {
                               ),
                             );
                           },
-                          child: CachedNetworkImage(
-                            imageUrl:
-                            '$imageUrl${searchedMovie?.results[index].backdropPath}',
-                            height: 170,
+                          child: ListTile(
+                            leading: CachedNetworkImage(
+                              imageUrl:'$imageUrl${searchedMovie?.results[index].backdropPath}',
+                              height: 170,
+                            ),
+                            trailing: Text(searchedMovie!.results[index].voteAverage.toString()),
+                            title: Text(searchedMovie!.results[index].title,style: const TextStyle(color: Colors.white,fontSize: 17),),
+                            subtitle: Text(searchedMovie!.results[index].releaseDate.year.toString()),
+
                           ),
                         ),
-                        Text(
-                          searchedMovie!.results[index].title,
-                          maxLines: 2,
-                          style: const TextStyle(
-                            fontSize: 14,
-                          ),
-                        ),
+                        Divider(
+                          color: Colors.white,
+                        )
                       ],
                     );
                   },
+
                 )
               ],
             ),
