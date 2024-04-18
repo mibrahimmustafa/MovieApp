@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:movie_app/modules/search/page/search_view.dart';
 import 'package:movie_app/modules/search/page/movie_model.dart ';
+=======
+>>>>>>> Seach_page
 
 
 
