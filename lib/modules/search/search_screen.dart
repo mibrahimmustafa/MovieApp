@@ -64,9 +64,10 @@ class _SearchScreenState extends State<SearchScreen> {
                     CupertinoIcons.search,
                     color: Colors.grey,
                   ),
-                  suffixIcon: const Icon(
+                  suffixIcon:  Icon(
                     Icons.cancel,
                     color: Colors.black,
+
                   ),
                   style: const TextStyle(color: Colors.white),
                   backgroundColor: Colors.grey.withOpacity(0.3),
@@ -91,18 +92,18 @@ class _SearchScreenState extends State<SearchScreen> {
                     )
                     : searchedMovie == null
                     ? const SizedBox.shrink()
-                    : ListView.builder(
+                    : GridView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: searchedMovie?.results.length,
-                //  gridDelegate:
-                 // const SliverGridDelegateWithFixedCrossAxisCount(
-                  //  crossAxisCount: 1,
-                    //mainAxisSpacing: 15,
-                    //crossAxisSpacing: 5,
-                    //childAspectRatio: 1.2 / 2,
-                  //),
+                  gridDelegate:
+                  const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1,
+                   // mainAxisSpacing: 15,
+                   // crossAxisSpacing: 5,
+                    childAspectRatio: 3 / 2,
+                  ),
                   itemBuilder: (context, index) {
                     return searchedMovie!.results[index].backdropPath ==
                         null
@@ -121,36 +122,55 @@ class _SearchScreenState extends State<SearchScreen> {
                         )
                       ],
                     )
-                        :Column(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    MovieDetailScreen(
-                                        movieId: searchedMovie!
-                                            .results[index].id),
-                              ),
-                            );
-                          },
-                          child: ListTile(
-                            leading: CachedNetworkImage(
-                              imageUrl:'$imageUrl${searchedMovie?.results[index].backdropPath}',
-                              height: 170,
-                            ),
-                            trailing: Text(searchedMovie!.results[index].voteAverage.toString()),
-                            title: Text(searchedMovie!.results[index].title,style: const TextStyle(color: Colors.white,fontSize: 17),),
-                            subtitle: Text(searchedMovie!.results[index].releaseDate.year.toString()),
-
+                        :Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      MovieDetailScreen(
+                                          movieId: searchedMovie!
+                                              .results[index].id),
+                                ),
+                              );
+                            },
+                            child: Column(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            MovieDetailScreen(
+                                                movieId: searchedMovie!
+                                                    .results[index].id),
+                                      ),
+                                    );
+                                  },
+                                  child: CachedNetworkImage(
+                                    imageUrl:
+                                    '$imageUrl${searchedMovie?.results[index].backdropPath}',
+                                    height: 170,
+                                  ),
+                                ),
+                                Text(
+                                  searchedMovie!.results[index].title,
+                                  maxLines: 2,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            )
                           ),
-                        ),
-                        Divider(
-                          color: Colors.white,
-                        )
-                      ],
-                    );
+                            ],
+                          ),
+                        );
                   },
 
                 )
