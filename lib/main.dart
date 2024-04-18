@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/config/application_theme_manager.dart';
 import 'package:movie_app/layout/layout_view.dart';
-import 'package:movie_app/modules/search/page/search_view.dart';
 import 'package:movie_app/modules/splash/page/splash_view.dart';
 
 void main() {

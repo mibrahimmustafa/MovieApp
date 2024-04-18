@@ -43,7 +43,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsStates> {
         emit(MovieDetailsErrorStates());
       },
       (data) async {
-Future.delayed(Duration(milliseconds: 200),() =>     emit(MovieDetailsSuccessStates(model: data)),);
+Future.delayed(const Duration(milliseconds: 200),() => emit(MovieDetailsSuccessStates(model: data)),);
 
 getSimilarMoviesList(id: id);
 

@@ -123,10 +123,10 @@ class homeView extends StatelessWidget {
                     const SizedBox(
                       height: 120,
                     ),
-              CustomListView(
-                titleListName: "New Releases",
-               newRealeasesList: cubit.newRealeasesListList,
-              ),
+                    CustomListView(
+                      titleListName: "New Releases",
+                     newRealeasesList: cubit.newRealeasesListList,
+                    ),
 
                     const SizedBox(
                       height: 40,

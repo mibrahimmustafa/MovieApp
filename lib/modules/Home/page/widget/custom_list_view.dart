@@ -47,67 +47,69 @@ final bool ?isShowDetails;
 
 
                   },
-                  child: SizedBox(
-                      width: width * 0.25,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: CachedNetworkImage(
-                              imageUrl:
-                                  "https://image.tmdb.org/t/p/w500${newRealeasesList![index].posterPath}",
-                              fit: BoxFit.cover,
-                              fadeInDuration: const Duration(seconds: 1),
-                              progressIndicatorBuilder: (context, url,
-                                      downloadProgress) =>
-                                  const Center(
-                                      child: SizedBox(
-                                          width: 20,
-                                          height: 20,
-                                          child: CircularProgressIndicator())),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
+                  child: SingleChildScrollView(
+                    child: SizedBox(
+                        width: width * 0.25,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: CachedNetworkImage(
+                                imageUrl:
+                                    "https://image.tmdb.org/t/p/w500${newRealeasesList![index].posterPath}",
+                                fit: BoxFit.cover,
+                                fadeInDuration: const Duration(seconds: 1),
+                                progressIndicatorBuilder: (context, url,
+                                        downloadProgress) =>
+                                    const Center(
+                                        child: SizedBox(
+                                            width: 20,
+                                            height: 20,
+                                            child: CircularProgressIndicator())),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                              ),
                             ),
-                          ),
-
-                          if(isShowDetails==true)...[
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.amberAccent,
-                                  size: 20,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  newRealeasesList![index].voteAverage.toString(),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                                child: Text(
-                                  newRealeasesList![index].title.toString(),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                )),
-                            Text(
-                              newRealeasesList![index].releaseDate.toString(),
-                              style: const TextStyle(
-                                  fontSize: 9, color: Colors.grey),
-                            )
-                          ]
-
-                        ],
-                      )),
+                    
+                            if(isShowDetails==true)...[
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const Icon(
+                                    Icons.star,
+                                    color: Colors.amberAccent,
+                                    size: 20,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    newRealeasesList![index].voteAverage.toString(),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                  child: Text(
+                                    newRealeasesList![index].title.toString(),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  )),
+                              Text(
+                                newRealeasesList![index].releaseDate.toString(),
+                                style: const TextStyle(
+                                    fontSize: 9, color: Colors.grey),
+                              )
+                            ]
+                    
+                          ],
+                        )),
+                  ),
                 ),
 
                 scrollDirection: Axis.horizontal,

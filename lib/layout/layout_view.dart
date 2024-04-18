@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/modules/Home/page/home_view.dart';
 import 'package:movie_app/modules/browse/page/browse_View.dart';
-import 'package:movie_app/modules/search/page/search_view.dart';
 import 'package:movie_app/modules/watchList/page/watchList_View.dart';
+
+import '../modules/search/search_screen.dart';
 
 class layoutView extends StatefulWidget {
   static const String routeName="layout";
@@ -16,16 +17,16 @@ class layoutView extends StatefulWidget {
 class _layoutViewState extends State<layoutView> {
   int currentIndex=0;
   List<Widget> screens=[
-    homeView(),
-    searchView(),
+    const homeView(),
+    SearchScreen(),
     browseView(),
-    watchListView(),
+    const watchListView(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff121312),
+      backgroundColor: const Color(0xff121312),
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
