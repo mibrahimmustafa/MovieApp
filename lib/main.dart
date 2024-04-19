@@ -2,13 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/core/config/application_theme_manager.dart';
 import 'package:movie_app/layout/layout_view.dart';
 import 'package:movie_app/modules/splash/page/splash_view.dart';
-
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+Future<void> main() async {
   runApp(const MyApp());
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
+
+
 
   // This widget is the root of your application.
   @override
@@ -24,7 +32,10 @@ class MyApp extends StatelessWidget {
         layoutView.routeName:(context) => layoutView(),
       },
     );
+
+
   }
+
 }
 
 
