@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-
+import 'category_detail.dart';
 import 'utils.dart';
 import 'package:http/http.dart' as http;
 import 'movie_detail_model.dart';
@@ -99,5 +99,19 @@ class ApiServices {
       return SearchModel.fromJson(jsonDecode(response.body));
     }
     throw Exception('failed to load  search movie ');
+  }
+
+  Future<CategoryDetails> getMovieCategory() async {
+    endPoint = 'genre/movie/list?language=en';
+    final url = '$baseUrl$endPoint$key';
+    print(url);
+
+    final response = await http.get(Uri.parse(url));
+    print (response.statusCode);
+    if (response.statusCode == 200) {
+      log('success');
+      return CategoryDetails.fromJson(jsonDecode(response.body));
+    }
+    throw Exception('failed to load  movie details');
   }
 }

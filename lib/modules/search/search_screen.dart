@@ -64,9 +64,9 @@ class _SearchScreenState extends State<SearchScreen> {
                     CupertinoIcons.search,
                     color: Colors.grey,
                   ),
-                  suffixIcon:  Icon(
+                  suffixIcon: const Icon(
                     Icons.cancel,
-                    color: Colors.black,
+                    color: Colors.grey,
 
                   ),
                   style: const TextStyle(color: Colors.white),
@@ -100,8 +100,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   gridDelegate:
                   const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 1,
-                   // mainAxisSpacing: 15,
-                   // crossAxisSpacing: 5,
+                    mainAxisSpacing: 15,
+                    crossAxisSpacing: 5,
                     childAspectRatio: 3 / 2,
                   ),
                   itemBuilder: (context, index) {
@@ -165,6 +165,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                     fontSize: 14,
                                   ),
                                 ),
+
+                              
                               ],
                             )
                           ),
