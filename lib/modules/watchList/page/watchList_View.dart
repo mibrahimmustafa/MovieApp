@@ -29,10 +29,10 @@ class watchListView extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text("shimaa hossni mohamed",
+                          Text("Mohamed Abdelrahman & Karim Ashraf",
                             style:TextStyle(
                               fontFamily: "Inter",
-                              fontSize: 17,
+                              fontSize: 10,
                               fontWeight: FontWeight.w400,
                               color: Colors.white,
                             ),),
