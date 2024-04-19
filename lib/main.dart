@@ -4,12 +4,21 @@ import 'package:movie_app/layout/layout_view.dart';
 import 'package:movie_app/modules/splash/page/splash_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:firebase_database/firebase_database.dart';
 Future<void> main() async {
-  runApp(const MyApp());
-
+WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+//FirebaseDatabase database = FirebaseDatabase.instance;
+// FirebaseApp secondaryApp = Firebase.app('SecondaryApp');
+// FirebaseDatabase databaseused = FirebaseDatabase.instanceFor(app: secondaryApp);
+
+final firebaseApp = Firebase.app();
+final rtdb = FirebaseDatabase.instanceFor(app: firebaseApp, databaseURL: 'https://movieapp-6a444-default-rtdb.firebaseio.com/');
+  runApp(const MyApp());
+
+
 }
 
 class MyApp extends StatelessWidget {

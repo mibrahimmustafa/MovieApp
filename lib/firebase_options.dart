@@ -49,6 +49,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1037488943544',
     projectId: 'movieapp-6a444',
     authDomain: 'movieapp-6a444.firebaseapp.com',
+    databaseURL: 'https://movieapp-6a444-default-rtdb.firebaseio.com',
     storageBucket: 'movieapp-6a444.appspot.com',
     measurementId: 'G-0T19QWPK8H',
   );
@@ -58,6 +59,7 @@ class DefaultFirebaseOptions {
     appId: '1:1037488943544:android:31b371283568d065c3df4d',
     messagingSenderId: '1037488943544',
     projectId: 'movieapp-6a444',
+    databaseURL: 'https://movieapp-6a444-default-rtdb.firebaseio.com',
     storageBucket: 'movieapp-6a444.appspot.com',
   );
 
@@ -66,6 +68,7 @@ class DefaultFirebaseOptions {
     appId: '1:1037488943544:ios:368f8a86da288ba8c3df4d',
     messagingSenderId: '1037488943544',
     projectId: 'movieapp-6a444',
+    databaseURL: 'https://movieapp-6a444-default-rtdb.firebaseio.com',
     storageBucket: 'movieapp-6a444.appspot.com',
     iosBundleId: 'com.example.movieApp',
   );
@@ -75,7 +78,9 @@ class DefaultFirebaseOptions {
     appId: '1:1037488943544:ios:368f8a86da288ba8c3df4d',
     messagingSenderId: '1037488943544',
     projectId: 'movieapp-6a444',
+    databaseURL: 'https://movieapp-6a444-default-rtdb.firebaseio.com',
     storageBucket: 'movieapp-6a444.appspot.com',
     iosBundleId: 'com.example.movieApp',
   );
+
 }

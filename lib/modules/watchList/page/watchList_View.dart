@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/main.dart';
+import 'package:firebase_database/firebase_database.dart';
+
 
 class watchListView extends StatelessWidget {
   const watchListView({super.key});
@@ -29,10 +32,10 @@ class watchListView extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text("shimaa hossni mohamed",
+                          Text("Mohamed AbdelRahman & Karim Ashraf",
                             style:TextStyle(
                               fontFamily: "Inter",
-                              fontSize: 17,
+                              fontSize: 10,
                               fontWeight: FontWeight.w400,
                               color: Colors.white,
                             ),),
