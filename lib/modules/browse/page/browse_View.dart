@@ -1,17 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/modules/browse/widget/widget_browse.dart';
 
-class browseView extends StatelessWidget {
-  final List<String> filmName=["ali","ola","maryam","ali","ola","maryam","ali","ola","maryam","ali","ola","maryam"];
+import '../../search/api_services.dart';
+import '../../search/category_detail.dart';
+
+class browseView extends StatefulWidget {
+
   browseView({super.key});
+
+  @override
+  State<browseView> createState() => _browseViewState();
+}
+
+class _browseViewState extends State<browseView> {
+  ApiServices apiServices = ApiServices();
+  CategoryDetails? category;
+  late Future<Genre> categoryMovies;
+
+  categoryfetch() {
+   return apiServices.getMovieCategory();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  // final List<String> filmName=["ali","ola","maryam","ali","ola","maryam","ali","ola","maryam","ali","ola","maryam"];
 
   @override
   Widget build(BuildContext context) {
     var theme=Theme.of(context);
+    var results =categoryfetch();
+    // print("results = $results");
+    // results=null;
     return  Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(toolbarHeight: 20),
-      body:  Column(
+      body:  results==null
+      ?const Text('No result found')
+      : Column(
         children: [
            Row(
             children: [
@@ -21,23 +49,12 @@ class browseView extends StatelessWidget {
             ],
           ),
 
-          Expanded(
+          const Expanded(
            // child: ListView.builder(
              // itemBuilder: (context, index) => browseWidget(name: filmName[index],),
               //itemCount: filmName.length,
             //),
-            child: Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                    childAspectRatio: 1.4,
-                  ),
-                  itemCount: filmName.length,
-                  itemBuilder: (context, index) => browseWidget(name: filmName[index]),),
-            ),
+            child: Text('hello')
           )
 
         ],
