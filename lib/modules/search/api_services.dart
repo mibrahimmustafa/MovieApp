@@ -103,13 +103,16 @@ class ApiServices {
 
   Future<CategoryDetails> getMovieCategory() async {
     endPoint = 'genre/movie/list?language=en';
-    final url = '$baseUrl$endPoint$key';
+    final url = '$baseUrl$endPoint';
     print(url);
+    final response = await http.get(Uri.parse(url), headers: {
+      'Authorization':'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTAyYjhjMDMxYzc5NzkwZmU1YzBiNGY5NGZkNzcwZCIsInN1YiI6IjYzMmMxYjAyYmE0ODAyMDA4MTcyNjM5NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.N1SoB26LWgsA33c-5X0DT5haVOD4CfWfRhwpDu9eGkc'
+    });
 
-    final response = await http.get(Uri.parse(url));
     print (response.statusCode);
     if (response.statusCode == 200) {
       log('success');
+      print(jsonDecode(response.body));
       return CategoryDetails.fromJson(jsonDecode(response.body));
     }
     throw Exception('failed to load  movie details');

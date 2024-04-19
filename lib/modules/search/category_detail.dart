@@ -13,15 +13,19 @@ class CategoryDetails {
 
   CategoryDetails({
     required this.genres,
+
   });
 
   factory CategoryDetails.fromJson(Map<String, dynamic> json) => CategoryDetails(
     genres: List<Genre>.from(json["genres"].map((x) => Genre.fromJson(x))),
+
   );
 
   Map<String, dynamic> toJson() => {
     "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
+
   };
+
 }
 
 class Genre {

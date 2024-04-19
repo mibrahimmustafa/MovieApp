@@ -18,12 +18,7 @@ class _browseViewState extends State<browseView> {
   late Future<Genre> categoryMovies;
 
   categoryfetch() {
-    apiServices.getMovieCategory().then((results) {
-
-        print("Category = $category");
-        return results;
-
-    });
+   return apiServices.getMovieCategory();
   }
 
   @override
@@ -36,12 +31,14 @@ class _browseViewState extends State<browseView> {
   @override
   Widget build(BuildContext context) {
     var theme=Theme.of(context);
-    category=categoryfetch();
+    var results =categoryfetch();
+    // print("results = $results");
+    // results=null;
     return  Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(toolbarHeight: 20),
-      body:  category==null
-      ?Text('error')
+      body:  results==null
+      ?const Text('No result found')
       : Column(
         children: [
            Row(
@@ -52,7 +49,7 @@ class _browseViewState extends State<browseView> {
             ],
           ),
 
-          Expanded(
+          const Expanded(
            // child: ListView.builder(
              // itemBuilder: (context, index) => browseWidget(name: filmName[index],),
               //itemCount: filmName.length,
