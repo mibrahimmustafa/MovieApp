@@ -88,9 +88,16 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 10),
                         Text(
                           movie.releaseDate.year.toString(),
+                          style: const TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          genresText,
                           style: const TextStyle(
                             color: Colors.grey,
                           ),
