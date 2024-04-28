@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class categoryDetails extends StatefulWidget {
-  final int movieId;
-  const categoryDetails({super.key, required this.movieId});
+  const categoryDetails({super.key,});
 
   @override
   State<categoryDetails> createState() => _categoryDetailsState();
@@ -12,6 +11,12 @@ class _categoryDetailsState extends State<categoryDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    var theme=Theme.of(context);
+
+    return  Scaffold(
+      appBar: AppBar(automaticallyImplyLeading: true,),
+      backgroundColor: theme.primaryColor,
+      body: Center(child: Text('hello')),
+    );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/modules/search/category_detail.dart';
-import '../../search/api_services.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'category_details.dart';
 
 class browseView extends StatefulWidget {
 
@@ -11,60 +13,96 @@ class browseView extends StatefulWidget {
 }
 
 class _browseViewState extends State<browseView> {
-  ApiServices apiServices = ApiServices();
-  CategoryDetails? category;
-  late Future<CategoryDetails> categoryMovies;
 
-  categoryfetch() {
-    categoryMovies = apiServices.getMovieCategory() ;
-   return apiServices.getMovieCategory();
+
+  List categoryname=[];
+
+  Future genres() async {
+    String url='https://api.themoviedb.org/3/genre/movie/list?api_key=b3f80fb0f7f9a63ba5c589e1bb9a7b78';
+    var response=await http.get(Uri.parse(url));
+    print(response.body);
+    //var responsebody=jsonDecode(response.body);
+    final List<dynamic> responsebody = json.decode(response.body)['genres'];
+
+
+    setState(() {
+      categoryname.addAll(responsebody);
+    });
+
+    print(categoryname);
+    // print(responsebosy[2]);
   }
+
 
   @override
-  void initState() {
-    categoryfetch();
+  void initState(){
+    genres();
     super.initState();
   }
-
-  // final List<String> filmName=["ali","ola","maryam","ali","ola","maryam","ali","ola","maryam","ali","ola","maryam"];
 
   @override
   Widget build(BuildContext context) {
     var theme=Theme.of(context);
-    var results =categoryfetch();
-   //  print("results = $results");
-    // results=null;
+
     return  Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(toolbarHeight: 20),
-      body:SingleChildScrollView(
-        child: FutureBuilder(
-          future: categoryMovies,
-          builder: (context, snapshot) {
-            if (snapshot.hasData){
-              final movie = snapshot.data;
-             // String genresText = movie!.genres.map((genre) => genre.name).join(', ');
-              List genresText = movie!.genres.map((genre) => genre.name) as List;
-              print("lentgh : $movie.genres.length");
-              return Column(
-                children: [
 
-                  //Text(genresText),
+        body: Column(
+          children: [
+            const SizedBox(height: 40,),
+            Row(
+              children: [
+                Text('Browse Category', style: theme.textTheme.labelLarge,),
+              ],
+            ),
 
-                  ListView.builder(
-                    itemCount: movie.genres.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          child: genresText.single,
-                        );
-                      },)
-                ],
-              );
-            }
-            return const SizedBox(child: Text('error'),);
-          },
-        ),
-      ),
+            const SizedBox(height: 10,),
+
+            Expanded(
+                child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: categoryname.isEmpty
+                  ?const Center(child: CircularProgressIndicator())
+                  : GridView.builder(
+                    itemCount: categoryname.length,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 30,
+                      childAspectRatio: 1.4,
+                    ),
+                    itemBuilder: (context, i) {
+                      return Center(
+                        child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => const categoryDetails(),));
+                              },
+                              child: Stack(
+                                children: [
+                                  Image.asset('assets/images/categ1.png'),
+                                  Positioned(
+                                    top: 35,
+                                    left: 35,
+                                    child: Text('${categoryname[i]['name']}',
+                                        style: theme.textTheme.titleMedium?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                        ),),
+                                  ),
+                                ],
+                              ),
+                            )),
+                      );
+                    },),
+            ))
+          ],
+        )
     );
   }
 }
