@@ -82,7 +82,7 @@ class _browseViewState extends State<browseView> {
                             child: InkWell(
                               onTap: () {
                                 Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) => const categoryDetails(),));
+                                    MaterialPageRoute(builder: (context) =>  categoryDetails(movieID: categoryname[i]['id'],),));
                               },
                               child: Stack(
                                 children: [
