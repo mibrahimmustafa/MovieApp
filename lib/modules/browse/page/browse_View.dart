@@ -82,17 +82,17 @@ class _browseViewState extends State<browseView> {
                             child: InkWell(
                               onTap: () {
                                 Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) =>  categoryDetails(movieID: categoryname[i]['id'],),));
+                                    MaterialPageRoute(builder: (context) =>  categoryDetails(movieId: categoryname[i]['id'],),));
                               },
                               child: Stack(
                                 children: [
-                                  Image.asset('assets/images/categ1.png'),
+                                  Image.asset('assets/images/categ1.png', opacity: const AlwaysStoppedAnimation(.11)),
                                   Positioned(
                                     top: 35,
                                     left: 35,
                                     child: Text('${categoryname[i]['name']}',
                                         style: theme.textTheme.titleMedium?.copyWith(
-                                          fontWeight: FontWeight.w600,
+                                          fontWeight: FontWeight.w900,
                                         ),),
                                   ),
                                 ],
