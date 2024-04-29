@@ -81,14 +81,12 @@ class _browseViewState extends State<browseView> {
                             ),
                             child: InkWell(
                               onTap: () {
-                                print(categoryname[i]['id']);
                                 Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) =>  categoryDetails(movieID: categoryname[i]['id'],),));
-                                  print (categoryDetails(movieID: categoryname[i]['id'],));
+                                    MaterialPageRoute(builder: (context) =>  categoryDetails(movieId: categoryname[i]['id'],),));
                               },
                               child: Stack(
                                 children: [
-                                  Image.asset('assets/images/categ1.png' ,opacity: const AlwaysStoppedAnimation(.15)),
+                                  Image.asset('assets/images/categ1.png',opacity: const AlwaysStoppedAnimation(.5)),
                                   Positioned(
                                     top: 35,
                                     left: 35,
