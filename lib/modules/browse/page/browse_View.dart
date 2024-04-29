@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/modules/browse/widget/widget_browse.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-import '../../search/api_services.dart';
-import '../../search/category_detail.dart';
+import 'category_details.dart';
 
 class browseView extends StatefulWidget {
 
@@ -13,52 +13,96 @@ class browseView extends StatefulWidget {
 }
 
 class _browseViewState extends State<browseView> {
-  ApiServices apiServices = ApiServices();
-  CategoryDetails? category;
-  late Future<Genre> categoryMovies;
 
-  categoryfetch() {
-   return apiServices.getMovieCategory();
+
+  List categoryname=[];
+
+  Future genres() async {
+    String url='https://api.themoviedb.org/3/genre/movie/list?api_key=b3f80fb0f7f9a63ba5c589e1bb9a7b78';
+    var response=await http.get(Uri.parse(url));
+    print(response.body);
+    //var responsebody=jsonDecode(response.body);
+    final List<dynamic> responsebody = json.decode(response.body)['genres'];
+
+
+    setState(() {
+      categoryname.addAll(responsebody);
+    });
+
+    print(categoryname);
+    // print(responsebosy[2]);
   }
+
 
   @override
-  void initState() {
+  void initState(){
+    genres();
     super.initState();
   }
-
-  // final List<String> filmName=["ali","ola","maryam","ali","ola","maryam","ali","ola","maryam","ali","ola","maryam"];
 
   @override
   Widget build(BuildContext context) {
     var theme=Theme.of(context);
-    var results =categoryfetch();
-    // print("results = $results");
-    // results=null;
+
     return  Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(toolbarHeight: 20),
-      body:  results==null
-      ?const Text('No result found')
-      : Column(
-        children: [
-           Row(
-            children: [
-              Text("Browse Category",
-                style: theme.textTheme.labelLarge,
-              ),
-            ],
-          ),
 
-          const Expanded(
-           // child: ListView.builder(
-             // itemBuilder: (context, index) => browseWidget(name: filmName[index],),
-              //itemCount: filmName.length,
-            //),
-            child: Text('hello')
-          )
+        body: Column(
+          children: [
+            const SizedBox(height: 40,),
+            Row(
+              children: [
+                Text('Browse Category', style: theme.textTheme.labelLarge,),
+              ],
+            ),
 
-        ],
-      ),
+            const SizedBox(height: 10,),
+
+            Expanded(
+                child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: categoryname.isEmpty
+                  ?const Center(child: CircularProgressIndicator())
+                  : GridView.builder(
+                    itemCount: categoryname.length,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 30,
+                      childAspectRatio: 1.4,
+                    ),
+                    itemBuilder: (context, i) {
+                      return Center(
+                        child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) =>  categoryDetails(movieID: categoryname[i]['id'],),));
+                              },
+                              child: Stack(
+                                children: [
+                                  Image.asset('assets/images/categ1.png'),
+                                  Positioned(
+                                    top: 35,
+                                    left: 35,
+                                    child: Text('${categoryname[i]['name']}',
+                                        style: theme.textTheme.titleMedium?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                        ),),
+                                  ),
+                                ],
+                              ),
+                            )),
+                      );
+                    },),
+            ))
+          ],
+        )
     );
   }
 }
