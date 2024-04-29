@@ -86,7 +86,7 @@ class _browseViewState extends State<browseView> {
                               },
                               child: Stack(
                                 children: [
-                                  Image.asset('assets/images/categ1.png',opacity: const AlwaysStoppedAnimation(.5)),
+                                  Image.asset('assets/images/categ1.png',opacity: const AlwaysStoppedAnimation(.11)),
                                   Positioned(
                                     top: 35,
                                     left: 35,
