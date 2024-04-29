@@ -12,6 +12,7 @@ class categoryDetails extends StatefulWidget {
 
   @override
   State<categoryDetails> createState() => _categoryDetailsState();
+
 }
 
 class _categoryDetailsState extends State<categoryDetails> {
@@ -24,6 +25,8 @@ class _categoryDetailsState extends State<categoryDetails> {
     apiServices.getSearchedMovie(movieID).then((results) {
       setState(() {
         searchedMovie = results;
+        //print (results);
+        print (movieID);
       });
     });
   }
@@ -31,6 +34,7 @@ class _categoryDetailsState extends State<categoryDetails> {
   void initState() {
     popularMovies = apiServices.getPopularMovies();
     super.initState();
+    print(popularMovies.toString());
   }
 
 
@@ -89,6 +93,6 @@ class _categoryDetailsState extends State<categoryDetails> {
           },
 
         )
-    );;
+    );
   }
 }
