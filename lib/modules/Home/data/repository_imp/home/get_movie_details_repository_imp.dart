@@ -3,11 +3,7 @@ import 'package:dartz/dartz.dart';
 import '../../../../../core/error/failure.dart';
 import '../../../../../core/error/server_failure.dart';
 import '../../../../../core/models/home_models/movie_details_model/movie_details_model.dart';
-import '../../../../../core/models/home_models/slider_model/slider_model.dart';
-import '../../../domain/entites/home/slider_entity.dart';
 import '../../../domain/repository/home/get_movie_details_repository.dart';
-import '../../../domain/repository/home/get_slider_repository.dart';
-import '../../data_sources/home/get_categories_data_source.dart';
 import '../../data_sources/home/get_movie_details_data_source.dart';
 
 class GetMovieDetailsRepositoryImp extends GetMovieDetailsRepository {

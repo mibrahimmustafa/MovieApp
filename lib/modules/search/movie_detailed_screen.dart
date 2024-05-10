@@ -1,5 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../firebase_func/firestore_Utiles.dart';
+import '../task_models.dart';
 import 'utils.dart';
 import 'movie_detail_model.dart';
 import 'movie_recommendation_mode.dart';
@@ -166,9 +169,33 @@ class MovieDetailScreenState extends State<MovieDetailScreen> {
                                             ),
                                           );
                                         },
-                                        child: CachedNetworkImage(
-                                          imageUrl:
-                                              "$imageUrl${movie.results[index].posterPath}",
+                                        child: Stack(
+                                          children: [
+                                            CachedNetworkImage(
+                                              imageUrl:
+                                                  "$imageUrl${movie.results[index].posterPath}",
+                                            ),
+                                            Container(
+                                              width: 30,
+                                              height: 40,
+                                              color: Colors.black,
+                                              child: IconButton(
+                                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                                icon: const Icon(Icons.add),
+                                                color: Colors.white,
+                                                onPressed: () {
+                                                  var data=TaskModel(
+                                                    title: movie.results[index].title,
+                                                    description: movie.results[index].overview,
+                                                    isDone: false,
+                                                    datetime: movie.results[index].releaseDate.year.toString(),
+                                                    posterPath: movie.results[index].posterPath,
+                                                  );
+                                                  FireStoreUtiles().addNewTask(data);
+                                                },
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       );
                                     },

@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/modules/task_models.dart';
+import 'package:movie_app/modules/watchList/widget/task_item_widget.dart';
+
+import '../../firebase_func/firestore_Utiles.dart';
 
 class watchListView extends StatelessWidget {
   const watchListView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var theme=Theme.of(context);
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(toolbarHeight: 20),
-      body:  Column(
+      body:   Column(
           children: [
-            const Padding(
+             const Padding(
               padding: EdgeInsets.all(8.0),
               child: Row(
                 children: [
@@ -18,61 +23,30 @@ class watchListView extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                children: [
-                  Image.asset("assets/images/movies_splash_background.png",height: 100,width: 100,),
-
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
+            FutureBuilder<List<TaskModel>>(
+                future:FireStoreUtiles().getDataFromFirestore(),
+                builder: (context, snapshot) {
+                  if(snapshot.hasError) {
+                      return const Column(
                         children: [
-                          Text("shimaa hossni mohamed",
-                            style:TextStyle(
-                              fontFamily: "Inter",
-                              fontSize: 17,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white,
-                            ),),
+                          Text('something happen '),
+                          Icon(Icons.refresh),
                         ],
-                      ),
-                      Row(
-                        children: [
-                          Text("2019",
-                            style:TextStyle(
-                              fontFamily: "Inter",
-                              fontWeight: FontWeight.normal,
-                              fontSize: 15,
-                              color: Colors.white30,
-                            ),),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text("hello everyone ",
-                            style:TextStyle(
-                              fontFamily: "Inter",
-                              fontWeight: FontWeight.normal,
-                              fontSize: 15,
-                              color: Colors.white30,
-                            ),),
-                        ],
-                      ),
+                      );
+                  }
+                  else if(snapshot.connectionState==ConnectionState.waiting){
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  var tasksList=snapshot.data??[];
+                  return Expanded(
+                    child: ListView.builder(
+                        itemBuilder: (context, index) => TaskItemWidget(taskModel: tasksList[index]),
+                      itemCount: tasksList.length,
 
-                    ],
-                  ),
-
-
-                ],
-              ),
-
+                    ),
+                  );
+                },
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Divider(thickness: 1,color: Colors.white,),
-            )
           ],
       ),
     );

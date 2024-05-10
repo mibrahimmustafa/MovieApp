@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/modules/search/widget/search_items.dart';
 
 import 'movie_model.dart';
 class searchView extends StatefulWidget {
@@ -31,10 +30,13 @@ class _searchViewState extends State<searchView> {
   }
 
   final mycontroller=TextEditingController();
+
+  @override
   void initistate(){
     super.initState();
     mycontroller.addListener(() {_printLastestValue;});
   }
+  @override
   void dispose(){
     mycontroller.dispose();
     super.dispose();
