@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/modules/task_models.dart';
 import 'package:movie_app/modules/watchList/widget/task_item_widget.dart';
-
 import '../../firebase_func/firestore_Utiles.dart';
+
 
 class watchListView extends StatelessWidget {
   const watchListView({super.key});
