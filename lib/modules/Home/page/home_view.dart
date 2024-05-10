@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/modules/Home/page/widget/custom_list_view.dart';
-
+import 'package:movie_app/modules/task_models.dart';
+import '../../firebase_func/firestore_Utiles.dart';
 import '../bloc/home_cubit/cubit.dart';
 import '../bloc/home_cubit/states.dart';
 
@@ -108,9 +109,20 @@ class homeView extends StatelessWidget {
                                     width: 30,
                                     height: 40,
                                     color: Colors.black,
-                                    child: const Icon(
-                                      Icons.add,
+                                    child: IconButton(
+                                      padding: const EdgeInsets.symmetric(vertical: 10),
+                                      icon: const Icon(Icons.add),
                                       color: Colors.white,
+                                      onPressed: () {
+                                        var data=TaskModel(
+                                            title: cubit.categoriesList[0].title.toString(),
+                                            description: cubit.categoriesList[0].overview.toString(),
+                                            isDone: false,
+                                            datetime: cubit.categoriesList[0].releaseDate.toString(),
+                                          posterPath: cubit.categoriesList[0].posterPath.toString(),
+                                        );
+                                        FireStoreUtiles().addNewTask(data);
+                                      },
                                     ),
                                   ),
                                 ),

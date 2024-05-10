@@ -28,7 +28,7 @@ class _SplashViewState extends State<SplashView> {
   Widget build(BuildContext context) {
    Size mediaQuery =MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0xff121312),
+      backgroundColor: const Color(0xff121312),
 
       body: Center(
         child: Image.asset("assets/images/movies_splash_background.png",

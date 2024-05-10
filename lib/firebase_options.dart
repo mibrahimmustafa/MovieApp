@@ -44,38 +44,43 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCwdWGkgWk93EfrcFmM5AGGdo7ERXS8Kt8',
-    appId: '1:1037488943544:web:2d684171ef22f0aec3df4d',
-    messagingSenderId: '1037488943544',
-    projectId: 'movieapp-6a444',
-    authDomain: 'movieapp-6a444.firebaseapp.com',
-    storageBucket: 'movieapp-6a444.appspot.com',
-    measurementId: 'G-0T19QWPK8H',
+    apiKey: 'AIzaSyBjLktQ1hwL49o0dhtBjS2SQIlaF3AMLKI',
+    appId: '1:421265513975:web:bfaa7c5c5e119140bf22f2',
+    messagingSenderId: '421265513975',
+    projectId: 'movieapp-db742',
+    authDomain: 'movieapp-db742.firebaseapp.com',
+    databaseURL: 'https://movieapp-db742-default-rtdb.firebaseio.com',
+    storageBucket: 'movieapp-db742.appspot.com',
+    measurementId: 'G-1E16Z66P62',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBs9gTxntslz3ioP5klPWncIKh7Y_Mtzuo',
-    appId: '1:1037488943544:android:31b371283568d065c3df4d',
-    messagingSenderId: '1037488943544',
-    projectId: 'movieapp-6a444',
-    storageBucket: 'movieapp-6a444.appspot.com',
+    apiKey: 'AIzaSyBgACkzMckzWD9PbUtWd_XEoMG_c6ro5dE',
+    appId: '1:421265513975:android:78a14caaa6197a67bf22f2',
+    messagingSenderId: '421265513975',
+    projectId: 'movieapp-db742',
+    databaseURL: 'https://movieapp-db742-default-rtdb.firebaseio.com',
+    storageBucket: 'movieapp-db742.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyClXGvUlTUvgtf7squx78FnikChxus2sKA',
-    appId: '1:1037488943544:ios:368f8a86da288ba8c3df4d',
-    messagingSenderId: '1037488943544',
-    projectId: 'movieapp-6a444',
-    storageBucket: 'movieapp-6a444.appspot.com',
+    apiKey: 'AIzaSyD5BkAlWI7whFmCnbj-xzFtJfhLSh1ZNlY',
+    appId: '1:421265513975:ios:4b1d89a1840713abbf22f2',
+    messagingSenderId: '421265513975',
+    projectId: 'movieapp-db742',
+    databaseURL: 'https://movieapp-db742-default-rtdb.firebaseio.com',
+    storageBucket: 'movieapp-db742.appspot.com',
     iosBundleId: 'com.example.movieApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyClXGvUlTUvgtf7squx78FnikChxus2sKA',
-    appId: '1:1037488943544:ios:368f8a86da288ba8c3df4d',
-    messagingSenderId: '1037488943544',
-    projectId: 'movieapp-6a444',
-    storageBucket: 'movieapp-6a444.appspot.com',
+    apiKey: 'AIzaSyD5BkAlWI7whFmCnbj-xzFtJfhLSh1ZNlY',
+    appId: '1:421265513975:ios:4b1d89a1840713abbf22f2',
+    messagingSenderId: '421265513975',
+    projectId: 'movieapp-db742',
+    databaseURL: 'https://movieapp-db742-default-rtdb.firebaseio.com',
+    storageBucket: 'movieapp-db742.appspot.com',
     iosBundleId: 'com.example.movieApp',
   );
+
 }

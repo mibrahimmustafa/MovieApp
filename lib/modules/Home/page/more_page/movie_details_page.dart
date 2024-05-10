@@ -69,20 +69,20 @@ class MovieDetailsPage extends StatelessWidget {
                         height: 10,
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 10, right: 10),
+                        padding: const EdgeInsets.only(left: 10, right: 10),
                         child: Text(
                           state.model!.title.toString(),
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ),
                       const SizedBox(
                         height: 5,
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 10, right: 10),
+                        padding: const EdgeInsets.only(left: 10, right: 10),
                         child: Text(
                           state.model!.releaseDate.toString(),
-                          style: TextStyle(color: Colors.grey),
+                          style: const TextStyle(color: Colors.grey),
                         ),
                       ),
                       const SizedBox(
@@ -135,7 +135,7 @@ class MovieDetailsPage extends StatelessWidget {
                                                 Border.all(color: Colors.grey),
                                           ),
                                           child: Padding(
-                                            padding: EdgeInsets.only(
+                                            padding: const EdgeInsets.only(
                                                 left: 10, right: 10),
                                             child: Center(
                                                 child: Text(
@@ -195,7 +195,7 @@ class MovieDetailsPage extends StatelessWidget {
                                 isShowDetails: true,
                               );
                             }else{
-                              return SizedBox();
+                              return const SizedBox();
                             }
 
 

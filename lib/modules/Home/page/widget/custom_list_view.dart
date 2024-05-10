@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../firebase_func/firestore_Utiles.dart';
+import '../../../task_models.dart';
 import '../../domain/entites/home/slider_entity.dart';
 import '../more_page/movie_details_page.dart';
 
@@ -16,9 +18,9 @@ final bool ?isShowDetails;
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       alignment: Alignment.topCenter,
-      color: Color(0xFF282A28),
+      color: const Color(0xFF282A28),
       child: Padding(
         padding: const EdgeInsets.only(left: 5, right: 5),
         child: Column(
@@ -27,15 +29,15 @@ final bool ?isShowDetails;
           children: [
             Text(
               titleListName ?? "",
-              style: TextStyle(fontSize: 16),textAlign: TextAlign.start,
+              style: const TextStyle(fontSize: 16),textAlign: TextAlign.start,
             ),
             const SizedBox(
               height: 10,
             ),
 
-            Container(
+            SizedBox(
               height:isShowDetails==true? height * 0.27: height * 0.20,
-              child:      newRealeasesList!.isEmpty?Center(child: const Text("Not Found")):ListView.separated(
+              child:      newRealeasesList!.isEmpty?const Center(child: Text("Not Found")):ListView.separated(
                 separatorBuilder: (context, index) => const SizedBox(
                   width: 10,
                 ),
@@ -56,23 +58,48 @@ final bool ?isShowDetails;
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(8),
-                              child: CachedNetworkImage(
-                                imageUrl:
-                                    "https://image.tmdb.org/t/p/w500${newRealeasesList![index].posterPath}",
-                                fit: BoxFit.cover,
-                                fadeInDuration: const Duration(seconds: 1),
-                                progressIndicatorBuilder: (context, url,
-                                        downloadProgress) =>
-                                    const Center(
-                                        child: SizedBox(
-                                            width: 20,
-                                            height: 20,
-                                            child: CircularProgressIndicator())),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
+                              child: Stack(
+                                children: [
+                                  CachedNetworkImage(
+                                    imageUrl:
+                                        "https://image.tmdb.org/t/p/w500${newRealeasesList![index].posterPath}",
+                                    fit: BoxFit.cover,
+                                    fadeInDuration: const Duration(seconds: 1),
+                                    progressIndicatorBuilder: (context, url,
+                                            downloadProgress) =>
+                                        const Center(
+                                            child: SizedBox(
+                                                width: 20,
+                                                height: 20,
+                                                child: CircularProgressIndicator())),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
+                                  ),
+                                 // Text('${newRealeasesList![index].id}'),
+                                  Container(
+                                    width: 30,
+                                    height: 40,
+                                    color: Colors.black,
+                                    child:  IconButton(
+                                      padding: const EdgeInsets.symmetric(vertical: 10),
+                                      icon: const Icon(Icons.add),
+                                      color: Colors.white,
+                                      onPressed: () {
+                                        var data=TaskModel(
+                                            title: newRealeasesList![index].title.toString(),
+                                            description: newRealeasesList![index].overview.toString(),
+                                            isDone: false,
+                                            datetime: newRealeasesList![index].releaseDate.toString(),
+                                          posterPath: newRealeasesList![index].posterPath.toString(),
+                                        );
+                                        FireStoreUtiles().addNewTask(data);
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                    
+
                             if(isShowDetails==true)...[
                               const SizedBox(
                                 height: 5,
@@ -86,7 +113,7 @@ final bool ?isShowDetails;
                                     color: Colors.amberAccent,
                                     size: 20,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 5,
                                   ),
                                   Text(

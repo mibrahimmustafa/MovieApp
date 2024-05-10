@@ -17,7 +17,7 @@ class _SearchItemsState extends State<SearchItems> {
   Widget build(BuildContext context) {
     return ListView.builder(
       //itemCount: display_list.length,
-        itemBuilder: (context, index) => ListTile(
+        itemBuilder: (context, index) => const ListTile(
 
         ),);
   }
